@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/XYZ.Domain" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/XYZ.Domain" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfContato">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Contato" nillable="true" type="tns:Contato" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContato" nillable="true" type="tns:ArrayOfContato" />
+  <xs:complexType name="Contato">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Celular" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DataNascimento" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Telefone" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Contato" nillable="true" type="tns:Contato" />
+  <xs:complexType name="Entity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DtCreation" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DtModified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="IdUserCreation" type="xs:long" />
+      <xs:element minOccurs="0" name="IdUserModified" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entity" nillable="true" type="tns:Entity" />
+</xs:schema>

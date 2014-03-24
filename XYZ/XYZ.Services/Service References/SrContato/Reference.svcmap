@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d342ac17-4b59-4a72-a085-58076bf40b5b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="XYZ.Core.Domain" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:3424/ContatoService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ContatoService.xsd" MetadataType="Schema" ID="2cb5bd15-ef23-4d76-a6de-253b10ef403b" SourceId="1" SourceUrl="http://localhost:3424/ContatoService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ContatoService.wsdl" MetadataType="Wsdl" ID="a5e2d153-2682-427f-9f23-ff1918a86fc8" SourceId="1" SourceUrl="http://localhost:3424/ContatoService.svc?wsdl" />
+    <MetadataFile FileName="ContatoService1.xsd" MetadataType="Schema" ID="f242089e-0140-44a9-be4d-ca0ca20a2718" SourceId="1" SourceUrl="http://localhost:3424/ContatoService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ContatoService2.xsd" MetadataType="Schema" ID="79028ff7-aa39-4d2c-9e4e-93c7723c4577" SourceId="1" SourceUrl="http://localhost:3424/ContatoService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ContatoService.disco" MetadataType="Disco" ID="27b727e4-6c45-43df-a47a-839c9698d389" SourceId="1" SourceUrl="http://localhost:3424/ContatoService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

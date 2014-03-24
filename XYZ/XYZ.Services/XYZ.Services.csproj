@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC1E8728-6693-4B9B-BE16-D68E7AFADCE4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XYZ.Services</RootNamespace>
+    <AssemblyName>XYZ.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clients\ContatoClient.cs" />
+    <Compile Include="Clients\ParceiroClient.cs" />
+    <Compile Include="Interfaces\IContatoService.cs" />
+    <Compile Include="Interfaces\IParceiroService.cs" />
+    <Compile Include="Interfaces\_IService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SrContato\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SrParceiro\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\SrContato\ContatoService.wsdl" />
+    <None Include="Service References\SrContato\ContatoService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SrContato\ContatoService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SrContato\ContatoService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SrParceiro\ParceiroService.wsdl" />
+    <None Include="Service References\SrParceiro\ParceiroService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SrParceiro\ParceiroService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SrContato\" />
+    <WCFMetadataStorage Include="Service References\SrParceiro\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrContato\ContatoService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrContato\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrContato\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrContato\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XYZ.Core.Interfaces\XYZ.Core.Interfaces.csproj">
+      <Project>{f9614a9f-b729-4140-9843-4e930c759d8c}</Project>
+      <Name>XYZ.Core.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XYZ.Core.Models\XYZ.Core.Domain.csproj">
+      <Project>{f37d697f-9fee-4102-96f9-ac06c93bc990}</Project>
+      <Name>XYZ.Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XYZ.Core.Utils\XYZ.Core.Utils.csproj">
+      <Project>{7604b0d4-f5f2-4ff0-bcf1-9b1faf5570dd}</Project>
+      <Name>XYZ.Core.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrParceiro\ParceiroService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrParceiro\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrParceiro\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SrParceiro\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f22bf274-e11b-4965-b0ea-f3488d1f303a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="XYZ.Core.Domain" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:3896/ParceiroService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ParceiroService.xsd" MetadataType="Schema" ID="3f962095-9ba3-47d1-87f7-9f7d896eb29b" SourceId="1" SourceUrl="http://localhost:3896/ParceiroService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ParceiroService.disco" MetadataType="Disco" ID="5a17a442-2772-49d2-a2aa-6d484412f934" SourceId="1" SourceUrl="http://localhost:3896/ParceiroService.svc?disco" />
+    <MetadataFile FileName="ParceiroService.wsdl" MetadataType="Wsdl" ID="14799692-01b1-45c5-ae49-aeeff41de1a8" SourceId="1" SourceUrl="http://localhost:3896/ParceiroService.svc?wsdl" />
+    <MetadataFile FileName="ParceiroService1.xsd" MetadataType="Schema" ID="8af3648e-44c5-461a-b9e7-284619e257b1" SourceId="1" SourceUrl="http://localhost:3896/ParceiroService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
