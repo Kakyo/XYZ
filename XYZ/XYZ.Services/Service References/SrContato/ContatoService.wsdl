@@ -19,6 +19,12 @@
   <wsdl:message name="IContatoService_GetContatos_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetContatosResponse" />
   </wsdl:message>
+  <wsdl:message name="IContatoService_UpdateContato_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContato" />
+  </wsdl:message>
+  <wsdl:message name="IContatoService_UpdateContato_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContatoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IContatoService">
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IContatoService/Ping" message="tns:IContatoService_Ping_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="GetContatos">
       <wsdl:input wsaw:Action="http://tempuri.org/IContatoService/GetContatos" message="tns:IContatoService_GetContatos_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IContatoService/GetContatosResponse" message="tns:IContatoService_GetContatos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContato">
+      <wsdl:input wsaw:Action="http://tempuri.org/IContatoService/UpdateContato" message="tns:IContatoService_UpdateContato_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IContatoService/UpdateContatoResponse" message="tns:IContatoService_UpdateContato_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IContatoService" type="tns:IContatoService">
@@ -42,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetContatos">
       <soap:operation soapAction="http://tempuri.org/IContatoService/GetContatos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContato">
+      <soap:operation soapAction="http://tempuri.org/IContatoService/UpdateContato" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

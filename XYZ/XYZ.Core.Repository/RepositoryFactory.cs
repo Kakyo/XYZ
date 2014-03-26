@@ -1,17 +1,17 @@
-﻿namespace XYZ.Repositories
+﻿namespace XYZ.Repository
 {
     using XYZ.Interfaces.Repositories;
-    using XYZ.Repositories.Implementations;
+    using XYZ.Repository.Implementations;
 
     public static class RepositoryFactory
     {
-        static IParceiroRepository _parceiroRepo;
-        public static IParceiroRepository ParceiroRepository
+        private static Dal.Context _dbContext;
+        static RepositoryFactory()
         {
-            get
-            {
-                return _parceiroRepo = _parceiroRepo ?? new ParceiroRepository();
-            }
+            System.Data.Entity.Database.SetInitializer(new Dal.ContextInitializer());
+
+            RepositoryFactory._dbContext = new Dal.Context();
+            RepositoryFactory._dbContext.Database.Initialize(false);
         }
 
         static IContatoRepository _contatoRepo;
@@ -19,7 +19,8 @@
         {
             get
             {
-                return _contatoRepo = _contatoRepo ?? new ContatoRepository();
+                return _contatoRepo = _contatoRepo
+                    ?? new ContatoRepository(RepositoryFactory._dbContext);
             }
         }
     }

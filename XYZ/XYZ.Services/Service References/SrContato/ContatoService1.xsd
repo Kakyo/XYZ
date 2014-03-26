@@ -12,6 +12,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="Celular" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="DataNascimento" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Endereco" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Nome" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Telefone" nillable="true" type="xs:string" />
         </xs:sequence>

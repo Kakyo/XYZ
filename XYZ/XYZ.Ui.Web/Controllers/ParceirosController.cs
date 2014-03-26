@@ -8,12 +8,8 @@ using XYZ.Interfaces.Services;
 
 namespace XYZ.Ui.Web.Controllers
 {
-    public class ParceirosController : BaseController<IParceiroService>
+    public class ParceirosController : Controller
     {
-        public ParceirosController(IParceiroService service)
-            : base(service)
-        {
-        }
         //
         // GET: /Contato/
         //[xyz.Authorize]

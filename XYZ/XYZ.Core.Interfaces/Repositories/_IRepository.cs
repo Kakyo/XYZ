@@ -9,9 +9,6 @@ namespace XYZ.Interfaces.Repositories
     public interface IRepository<TEntity>
         where TEntity: Entities.IEntity
     {
-        TEntity Create(TEntity entity);
-        IEnumerable<TEntity> Read();
-        TEntity Update(TEntity entity);
-        TEntity Delete(TEntity entity);
+        IEnumerable<TEntity> Read(int take, int skip);
     }
 }

@@ -8,5 +8,6 @@ namespace XYZ.Interfaces.Repositories
 {
     public interface IContatoRepository : IRepository<Entities.IContatoEntity>
     {
+        new Entities.IContatoEntity Update(long idContato, string celular, DateTime dataNasc);
     }
 }

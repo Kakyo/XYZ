@@ -28,10 +28,7 @@ namespace XYZ.Ui.Web
         private void AddBindings()
         {
             this._container.Register<IContatoService, ContatoClient>();
-            this._container.Register<IParceiroService, ParceiroClient>();
 
-            this._container.Register<IController, Controllers.ContatosController>
-                (typeof(Controllers.ContatosController).Name);
             this._container.Register<IController, Controllers.ParceirosController>
                 (typeof(Controllers.ParceirosController).Name);
         }

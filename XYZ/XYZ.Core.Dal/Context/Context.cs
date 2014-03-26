@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XYZ.Dal.Context
+namespace XYZ.Dal
 {
     public class Context : DbContext
     {
         public DbSet<Domain.Contato> Contatos { get; set; }
-        public DbSet<Domain.Parceiro> Parceiros { get; set; }
     }
 }

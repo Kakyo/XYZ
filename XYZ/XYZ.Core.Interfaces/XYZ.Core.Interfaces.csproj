@@ -46,10 +46,8 @@
     <Compile Include="Dependencies\IDependencyResolver.cs" />
     <Compile Include="Dependencies\DependencyLifetime.cs" />
     <Compile Include="Entities\IContatoEntity.cs" />
-    <Compile Include="Entities\IParceiroEntity.cs" />
     <Compile Include="Entities\_IEntity.cs" />
     <Compile Include="Repositories\IContatoRepository.cs" />
-    <Compile Include="Repositories\IParceiroRepository.cs" />
     <Compile Include="Repositories\_IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

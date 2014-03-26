@@ -2,4 +2,85 @@
     ViewBag.Title = "Parceiros";
 }
 
-<div id="contactTable"></div>
+<div class="jumbotron">
+    <h1>Seja bem vindo!</h1>
+    <p>Este é um projeto de demonstração para o processo seletivo da MinuTrade</p>
+    <p>Utilizei as seguintes bibliotecas/componente:</p>
+    <ul>
+        <li>Entity Framework</li>
+        <li>LightInjector (IoC/Di)</li>
+        <li>Sass</li>
+        <li>Twitter Bootstrap</li>
+        <li>SignalR</li>
+        <li>KnockoutJs</li>
+        <li>WCF</li>
+        <li>Postsharp</li>
+    </ul>
+</div>
+<table class="table table-hover table-striped cantato-list container-fluid">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Nome</td>
+            <td>Endereço</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: itens">
+    <tr class="contato-item" data-bind="visible: Init">
+        <td><!--ko text: Id--><!--/ko--></td>
+        <td>
+            <!--ko text: Nome--><!--/ko-->
+        </td>
+        <td>
+            <!--ko text: Endereco--><!--/ko-->
+        </td>
+        <td>
+            <input class="contato-entry-id" type="hidden" data-bind="value: Id" />
+            <button class="btn-item-edit btn btn-primary pull-right"
+                    data-bind="visible: Enabled()">Abrir</button>
+            <img src="/Content/image/tick.png" class="contato-ok pull-right" 
+                data-bind="visible: !!Celular() && Enabled()"/>
+            <span class="contato-block-msg text-right small" data-bind="visible: !Enabled()">
+                Em edição por outro usuário;
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="block-overlay" data-bind="visible: form().Enabled()"></div>
+<div class="contato-form-wrapper" data-bind="with: form, visible: form().Enabled()">
+
+    <form class="contato-form form-horizontal clearfix" role="form">
+        <input class="contato-entry-id" type="hidden" data-bind="value: Id" />
+        <h3>Editar contato</h3>
+
+        <button class="btn-form-submit btn btn-primary pull-right">Salvar</button>
+        <button class="btn-form-cancel btn btn-default">Cancelar</button>
+
+        <hr />
+
+        <label>Nome:&nbsp;</label>
+        <input class="form-control" type="text" disabled="disabled"
+            name="Nome" data-bind="value: Nome" />
+
+        <label>Telefone:&nbsp;</label>
+            <input class="form-control" type="text" disabled="disabled"
+                name="Telefone" data-bind="value: Telefone" />
+
+        <label>Endereço:&nbsp;</label>
+        <input class="form-control" type="text" disabled="disabled" 
+            name="Endereco" data-bind="value: Endereco" />
+
+        <hr />
+
+        <label>Celular:&nbsp;</label>
+        <input class="form-control" type="text"
+            name="Celular" data-bind="value: Celular" />
+
+        <label>Data Nascimento:&nbsp;</label>
+        <input class="form-control" type="text"
+            name="DataNascimento" data-bind="value: DataNascimento" />
+    </form>
+</div>

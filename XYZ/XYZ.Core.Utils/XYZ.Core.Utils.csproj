@@ -63,7 +63,9 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Loops.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleData\Generate.cs" />
     <Compile Include="Serialization\Json.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,42 +15,45 @@ namespace XYZ.Ui.Web
             bundleCollection.Clear();
 
             bundleCollection.Add(GetScriptBundle("modernizr", "modernizr-{version}.js"));
-
-            string jquery,react,signalr,bootstrap;
-            GetLibraryPaths(out jquery, out react, out signalr, out bootstrap);
-            bundleCollection.Add(GetScriptBundle("library", jquery, signalr, bootstrap, react
-                , "react/JSXTransformer-{version}.js"));
+            bundleCollection.Add(GetScriptBundle("library", GetJsLibraryPaths()));
 
             bundleCollection.Add(GetStyleBundle("site"
                 , "bootstrap/bootstrap.min.css", "bootstrap/bootstrap-theme.min.css", "site.css"));
         }
 
-        private static void GetLibraryPaths(out string jquery, out string react, out string signalr, out string bootstrap)
+        private static string[] GetJsLibraryPaths()
         {
+            List<string> paths = new List<string>();
 
-            jquery
+            //  jQuery files
+            paths.Add(IfDebug("jquery/jquery-{version}.js"
+                , "jquery/jquery-{version}.min.js"));
+
+            //  SignalR files
+            paths.Add(IfDebug("signalr/jquery.signalR-{version}.js"
+                , "signalr/jquery.signalR-{version}.min.js"));
+
+            //  Bootstrap files
+            paths.Add(IfDebug("bootstrap/bootstrap.js"
+                , "bootstrap/bootstrap.min.js"));
+
+            //  Knockout files
+            paths.Add(IfDebug("knockout/knockout-{version}.js"
+                , "knockout/knockout-{version}.min.js"));
+            paths.Add(IfDebug("knockout/knockout.mapping-latest.js"
+                , "knockout/knockout.mapping-latest.min.js"));
+            //paths.Add(IfDebug("knockout/knockout.validation.js"
+            //    , "knockout/knockout.validation.min.js"));
+
+            return paths.ToArray();
+        }
+
+        private static string IfDebug(string isDebug, string notDebug)
+        {
 #if DEBUG
- = "jquery/jquery-{version}.js";
+            return isDebug;
 #else
-                = "jquery/jquery-{version}.min.js";
-#endif
-            react
-#if DEBUG
- = "react/react-{version}.js";
-#else
-                = "react/react-{version}.min.js";
-#endif
-            signalr
-#if DEBUG
- = "signalr/jquery.signalR-{version}.js";
-#else
-                = "signalr/jquery.signalR-{version}.min.js";
-#endif
-            bootstrap
-#if DEBUG
- = "bootstrap/bootstrap.js";
-#else
-                = "bootstrap/bootstrap.min.js";
+            return notDebug;
 #endif
         }
 

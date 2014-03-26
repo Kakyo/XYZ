@@ -1,0 +1,49 @@
+@import '_mixins.scss';
+
+.block-overlay {
+    background: rgba(60,60,60,0.5);
+
+	@include fixed(-1 -1);
+	@include size(101%, 101%);
+}
+.contato-block-msg {
+	@include size(100%);
+    display: inline-block;
+    min-height: 18px;
+    margin: 8px 0;
+}
+
+.cantato-list,
+.contato-item {
+    padding: 10px 0;
+}
+.contato-form {
+    padding: 10px;
+}
+.contato-ok {
+    padding: 4px 6px;
+}
+.contato-item {
+    position: relative;
+
+    td {
+        color: #666;
+    }
+}
+
+.contato-form-wrapper {
+	@include fixed(20 50%);
+	@include size(50%);
+	@include box-emboss();
+    margin-left: -25%;
+	
+	.block-overlay {
+        background: black();
+    }
+
+    .contato-form {
+        @include relative;
+        z-index: 100;
+        background: white();
+    }
+}

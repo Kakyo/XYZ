@@ -19,7 +19,10 @@ namespace XYZ.Services.SrContato {
         bool Ping();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContatoService/GetContatos", ReplyAction="http://tempuri.org/IContatoService/GetContatosResponse")]
-        System.Collections.Generic.List<XYZ.Domain.Contato> GetContatos(int take);
+        System.Collections.Generic.List<XYZ.Domain.Contato> GetContatos(int take, int skip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IContatoService/UpdateContato", ReplyAction="http://tempuri.org/IContatoService/UpdateContatoResponse")]
+        XYZ.Domain.Contato UpdateContato(long idContato, string celular, System.DateTime dataNasc);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -53,8 +56,12 @@ namespace XYZ.Services.SrContato {
             return base.Channel.Ping();
         }
         
-        public System.Collections.Generic.List<XYZ.Domain.Contato> GetContatos(int take) {
-            return base.Channel.GetContatos(take);
+        public System.Collections.Generic.List<XYZ.Domain.Contato> GetContatos(int take, int skip) {
+            return base.Channel.GetContatos(take, skip);
+        }
+        
+        public XYZ.Domain.Contato UpdateContato(long idContato, string celular, System.DateTime dataNasc) {
+            return base.Channel.UpdateContato(idContato, celular, dataNasc);
         }
     }
 }

@@ -1,113 +1,193 @@
 ﻿String.prototype.toDate = function () {
     //this "toDate" parse was made especifically for current context
-    var milli = this.replace(/\/Date\((-?\d+)\)\//, '$1');
-    var d = new Date(parseInt(milli));
+    var d = new Date(this);
+
+    if (isNaN(d.getDay()))
+        return "";
 
     return d.getDay() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
 }
+
 $(function () {
 
-    //#region [ Hubs ]
-
-    var $table = $("#contactTable");
-
-    function onParceiroRegistrado() {
-
+    var loading = false;
+    function loadEntries() {
+        if (!loading) {
+            loading = true;
+            //  XYZ.Ui.Web.Hub.ContatoHub.GetContatos(int take) , server side C# function
+            contatosHub.server.getContatos(20, contatoViewModel.itens().length);
+        }
     }
-    function onAtualizado_Contato(contato) {
-        var $row = $table.find("#contactId[value='" + contato.Id + "']").parentsUntil("tr");
-        $row.find("#celular").val(contato.Celular);
-        $row.find("#dataNascimento").val(contato.DtNasc);
+
+    //#region [ Hub - Contato ]
+
+    function onSet_Contato(list) {
+        for (var i = 0, len = list.length; i < len; i++)
+            contatoViewModel.itens.push(new ContatoItem(list[i]));
+        loading = false;
     }
-    function onEditando_Contato(idContato) {
-        var $context = $table.find("#id[value='" + idContato + "']").parentsUntil(".contatoEntry");
-        $context.trigger("change", { editing: true });
+    function onAtualizado_Contato(idContato, celular, dtNasc) {
+        contatoViewModel.updateContato(idContato, celular, dtNasc);
+    }
+    function onEditando_Contato(idContato, shouldBlock) {
+        contatoViewModel.editContato(parseInt(idContato, 10), shouldBlock);
     }
 
     var contatosHub = $.connection.contatoHub;
     contatosHub.client.editando = onEditando_Contato;
+    contatosHub.client.atualizado = onAtualizado_Contato;
+    contatosHub.client.setContatos = onSet_Contato;
 
-    var parceirosHub = $.connection.parceiroHub;
-    parceirosHub.client.registrado = onParceiroRegistrado;
+    $.connection.hub.start().done(loadEntries);
 
-    $.connection.hub.start().done(function () {
+    //#endregion [ Hub - Contato ]
+    //#region [ Knockout ]
 
+    function ContatoItem(contato) {
 
-        React.renderComponent(
-          ContatoList({ url: "/Contatos/Get?take=10" }),
-          document.getElementById('contactTable')
-        );
+        var self = this;
+        var _init = !!contato;
+        var _id = parseInt(_init ? contato.Id : -1, 10);
 
-    });
+        //  XYZ.Ui.Web.Hub.ContatoHub.Registrar(string idContato) , server side C# function
+        contatosHub.server.registrar(_id);
+        self.Enabled = ko.observable(true);
 
-    //#endregion [ Hubs ]
-    //#region [ React Components ]
+        self.Init = _init;
+        self.Id = _id;
+        self.Nome = _init ? contato.Nome : "";
+        self.Endereco = _init ? contato.Endereco : "";
+        self.Telefone = _init ? contato.Telefone : "";
+        self.Celular = ko.observable(_init ? contato.Celular : "");
 
-    var ContatoEntry = React.createClass({
-        displayName: 'ContatoEntry',
-        getInitialState: function () {
-            return {};
-        },
-        onClick: function () {
+        var dt = contato.DataNascimento ? contato.DataNascimento.toDate() : "";
+        self.DataNascimento = ko.observable(_init ? dt : "");
 
-            var contato = this.state.contato ? this.state.contato : this.props.contato;
-            if (contatosHub.server.editar(contato.Id)) {
-                contato.Editando = true;
-                this.setState({ contato: contato });
-            }
+    }
+    function ContatoForm(contato) {
 
-        },
-        render: function () {
-            var contato = this.state.contato ? this.state.contato : this.props.contato;
-            var visible = { display: (contato.Editando ? "block" : "none") };
-            return (React.DOM.div({ className: "contatoEntry" },
-                React.DOM.div({ className: "block-overlay", style: visible }),
-                React.DOM.div(null,
-                    React.DOM.input({ id: "id", type: "hidden", value: this.props.contato.Id }),
-                    React.DOM.label(null, "Id:   ", contato.Id),
-                    React.DOM.label(null, "Nome: ", contato.Nome),
-                    React.DOM.label(null, "Data de Nascimento: ", contato.DataNascimento.toDate()),
-                    React.DOM.input({
-                        type: "button", className: "btn-edit btn-primary"
-                        , value: "Abrir", onClick: this.onClick.bind(this)
-                    })
-                )
-            ));
-        }
-    });
-    var ContatoList = React.createClass({
-        displayName: 'ContatoList',
-        getInitialState: function () {
-            return { data: [] };
-        },
-        componentWillMount: function () {
-            $.ajax({
-                url: this.props.url,
-                dataType: 'json',
-                success: function (data) {
-                    this.setState({ data: data });
-                }.bind(this),
-                error: function (xhr, status, err) {
-                    console.error(this.props.url, status, err.toString());
-                }.bind(this)
-            });
-        },
-        render: function () {
-            var contatoEntries = this.state.data.map(function (contato) {
-                contatosHub.server.registrar(contato.Id);
-                return ContatoEntry({ contato: contato });
-            });
-            return (React.DOM.div({ className: "contatoList" }, contatoEntries));
-        }
-    });
+        var self = this;
+        var _init = !!contato;
+        var _id = parseInt(_init ? contato.Id : -1, 10);
 
-    //#endregion [ React Components ]
+        self.Enabled = ko.observable(_init);
 
+        self.Id = _id;
+        self.Nome = _init ? contato.Nome : "";
+        self.Endereco = _init ? contato.Endereco : "";
+        self.Telefone = _init ? contato.Telefone : "";
+        self.Celular = ko.observable(_init ? contato.Celular() : "");
+        self.DataNascimento = ko.observable(_init ? contato.DataNascimento().toDate() : "");
 
-    function onClick_AbrirContatoEntry() {
-        var $context = $(this).parentsUntil(".contatoEntry");
-        contatosHub.server.editar($context.find("#id")[0].value);
     }
 
-    //$(document).on('click', '.btn-edit', onClick_AbrirContatoEntry);
+    function ContatoViewModel() {
+        //#region [ Methods ]
+
+        function _getContatoIndex(idContato) {
+            idContato = parseInt(idContato, 10);
+            var list = self.itens();
+            for (var i = 0, len = list.length; i < len; i++)
+                if (list[i].Id === idContato)
+                    return i;
+        }
+        function onEditContato(idContato, shouldBlock) {
+            var i = _getContatoIndex(idContato);
+
+            self.itens()[i].Enabled(!shouldBlock);
+        }
+        function onUpdateContato(idContato, celular, dtNasc) {
+            var _item = self.itens()[_getContatoIndex(idContato)];
+
+            _item.Enabled(true);
+            _item.Celular(celular);
+            _item.DataNascimento(dtNasc);
+        }
+
+        function onOpenContato(idContato) {
+            var i = _getContatoIndex(idContato);
+
+            self.form(new ContatoForm(self.itens()[i]));
+            //  XYZ.Ui.Web.Hub.ContatoHub.Editar(string idContato) , server side C# function
+            contatosHub.server.editar(idContato, true);
+        }
+        function onCloseContato(isPost) {
+            var _form = self.form();
+
+            _form.Enabled(false);
+
+            if (isPost)
+                //  XYZ.Ui.Web.Hub.ContatoHub.Atualizar
+                //  (string idContato, string celular, string dataNascimento) 
+                //  , server side C# function
+                contatosHub.server.atualizar(_form.Id, _form.Celular(), _form.DataNascimento());
+            else
+                contatosHub.server.editar(_form.Id, false);
+        }
+
+        //#endregion [ Methods ]
+
+        var self = this;
+        self.itens = ko.observableArray();
+        self.form = ko.observable(new ContatoForm());
+
+        self.editContato = onEditContato;
+        self.updateContato = onUpdateContato;
+        self.openContato = onOpenContato;
+        self.closeContato = onCloseContato;
+    }
+
+    var contatoViewModel = new ContatoViewModel();
+    ko.applyBindings(contatoViewModel);
+
+    //#endregion [ Knockout ]
+    //#region [ Event Handlers ]
+
+    function onClick_AbrirItem(ev) {
+        ev.preventDefault();
+        var idContato = $(this).closest(".contato-item").find(".contato-entry-id")[0].value;
+        contatoViewModel.openContato(idContato);
+    }
+    function onCancel_Form(ev) {
+        ev.preventDefault();
+        contatoViewModel.closeContato(false);
+    }
+    function onSubmit_Form(ev) {
+        ev.preventDefault();
+        contatoViewModel.closeContato(true);
+    }
+    function onScroll_Page(ev) {
+        if (detectScrollDirection() === -1
+            && window.pageYOffset >= document.body.clientHeight - window.innerHeight - 400)
+            loadEntries();
+    }
+
+    var lastScrollTop = 0, scrollDirection;
+    function detectScrollDirection() {
+        var st = window.pageYOffset;
+
+        if (st > lastScrollTop) {
+            // scrolling down
+            scrollDirection = -1;
+        } else if (st < lastScrollTop) {
+            // scrolling up
+            scrollDirection = 1;
+        } else {
+            // static
+            scrollDirection = 0;
+        }
+        lastScrollTop = st;
+        return scrollDirection;
+    }
+
+    $(document)
+        .on('click', '.btn-item-edit', onClick_AbrirItem)
+        .on('click', '.btn-form-cancel', onCancel_Form)
+        .on('click', '.btn-form-submit', onSubmit_Form);
+
+    $(window)
+        .on('scroll', onScroll_Page);
+
+    //#endregion [ Event Handlers ]
+
 });

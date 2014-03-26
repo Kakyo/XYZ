@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XYZ.Interfaces.Entities;
 
 namespace XYZ.Services.Clients
 {
@@ -12,9 +13,15 @@ namespace XYZ.Services.Clients
         {
             return ServiceFactory.ContatoService.Ping();
         }
-        public List<Domain.Contato> GetContatos(int take)
+        public IEnumerable<IContatoEntity> GetContatos(int take, int skip)
         {
-            return ServiceFactory.ContatoService.GetContatos(take);
+            return ServiceFactory.ContatoService
+                .GetContatos(take, skip);
+        }
+        public IContatoEntity UpdateContato(long idContato, string celular, DateTime dataNasc)
+        {
+            return (IContatoEntity)ServiceFactory.ContatoService
+                .UpdateContato(idContato, celular, dataNasc);
         }
     }
 }

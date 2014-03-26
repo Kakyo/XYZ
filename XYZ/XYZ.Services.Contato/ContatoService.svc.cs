@@ -15,13 +15,19 @@ namespace XYZ.Services.Contato
             return true;
         }
 
-        public List<Domain.Contato> GetContatos(int take)
+        public List<Domain.Contato> GetContatos(int take, int skip)
         {
-            return XYZ.Repositories.RepositoryFactory.ContatoRepository
-                .Read()
-                .Cast<Domain.Contato>()
+            return XYZ.Repository.RepositoryFactory
+                .ContatoRepository
+                .Read(take, skip)
+                .Select(s=>(Domain.Contato)s)
                 .ToList();
         }
-
+        public Domain.Contato UpdateContato(long idContato, string celular, DateTime dataNasc)
+        {
+            return (Domain.Contato)XYZ.Repository.RepositoryFactory
+                .ContatoRepository
+                .Update(idContato, celular, dataNasc);
+        }
     }
 }

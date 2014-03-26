@@ -3,37 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.SqlServer;
+using XYZ.Interfaces.Entities;
+using XYZ.Interfaces.Repositories;
 
-namespace XYZ.Repositories.Implementations
+namespace XYZ.Repository.Implementations
 {
-    public class ContatoRepository : Interfaces.Repositories.IContatoRepository
+    internal class ContatoRepository : IContatoRepository
     {
-        public Interfaces.Entities.IContatoEntity Create(Interfaces.Entities.IContatoEntity entity)
+        private readonly Dal.Context _dbContext;
+        public ContatoRepository(Dal.Context dbContext)
         {
-            throw new NotImplementedException();
+            this._dbContext = dbContext;
         }
 
-        public IEnumerable<Interfaces.Entities.IContatoEntity> Read()
+        public IEnumerable<IContatoEntity> Read(int take, int skip)
         {
-            List<Domain.Contato> collection = new List<Domain.Contato>{
-                new Domain.Contato() { Id = 1
-                    , Nome ="Fulano da Silva"
-                    , DataNascimento=DateTime.Now.AddYears(-25) },
-                new Domain.Contato() { Id = 2
-                    , Nome ="Ciclano da Silva"
-                    , DataNascimento=DateTime.Now.AddYears(-21) }
-            };
-            return collection;
+            return this._dbContext.Transaction(scope =>
+            {
+                var dbSet = this._dbContext.Contatos
+                    .AsNoTracking()
+                    .AsQueryable();
+
+                if (take > 0)
+                    dbSet = dbSet.OrderBy(o => o.Id).Skip(skip).Take(take);
+
+                return dbSet;
+            });
         }
 
-        public Interfaces.Entities.IContatoEntity Update(Interfaces.Entities.IContatoEntity entity)
+        public IContatoEntity Update(long idContato, string celular, DateTime dataNasc)
         {
-            throw new NotImplementedException();
+            return this._dbContext.Transaction(scope =>
+            {
+                IContatoEntity contato = scope.Contatos.Find(idContato);
+                contato.Celular = celular;
+                contato.DataNascimento = dataNasc;
+                contato.DtModified = DateTime.Now;
+                return contato;
+            });
         }
 
-        public Interfaces.Entities.IContatoEntity Delete(Interfaces.Entities.IContatoEntity entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

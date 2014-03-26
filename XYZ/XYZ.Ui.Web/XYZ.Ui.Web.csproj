@@ -63,9 +63,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -140,6 +140,8 @@
     <Content Include="Content\Styles\bootstrap\bootstrap-theme.css.map" />
     <Content Include="Content\Styles\bootstrap\bootstrap.css.map" />
     <Content Include="config.rb" />
+    <Content Include="Content\Sass\site.scss" />
+    <Content Include="Content\Sass\_mixins.scss" />
     <None Include="Content\Scripts\jquery\jquery-2.1.0.intellisense.js" />
     <Content Include="Content\Scripts\bootstrap\bootstrap.js" />
     <Content Include="Content\Scripts\bootstrap\bootstrap.min.js" />
@@ -148,11 +150,12 @@
     <Content Include="Content\Scripts\modernizr-2.7.2.js" />
     <Content Include="Content\Scripts\signalr\jquery.signalR-2.0.2.js" />
     <Content Include="Content\Scripts\signalr\jquery.signalR-2.0.2.min.js" />
-    <Content Include="Content\Scripts\react\JSXTransformer-0.9.0.js" />
-    <Content Include="Content\Scripts\react\react-0.9.0.js" />
-    <Content Include="Content\Scripts\react\react-0.9.0.min.js" />
-    <Content Include="Content\Scripts\react\react-with-addons-0.9.0.js" />
-    <Content Include="Content\Scripts\react\react-with-addons-0.9.0.min.js" />
+    <Content Include="Content\Scripts\knockout\knockout-3.1.0.js" />
+    <Content Include="Content\Scripts\knockout\knockout-3.1.0.min.js" />
+    <Content Include="Content\Scripts\knockout\knockout.mapping-latest.js" />
+    <Content Include="Content\Scripts\knockout\knockout.mapping-latest.min.js" />
+    <Content Include="Content\Scripts\knockout\knockout.validation.js" />
+    <Content Include="Content\Scripts\knockout\knockout.validation.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -161,14 +164,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Content Include="Content\Styles\site.css" />
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ContatosController.cs" />
     <Compile Include="Controllers\ParceirosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hub\ContatoHub.cs" />
-    <Compile Include="Hub\ParceiroHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,17 +188,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Sass\" />
+    <Folder Include="Content\image\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XYZ.Core.Interfaces\XYZ.Core.Interfaces.csproj">
       <Project>{f9614a9f-b729-4140-9843-4e930c759d8c}</Project>
       <Name>XYZ.Core.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XYZ.Core.Models\XYZ.Core.Domain.csproj">
-      <Project>{f37d697f-9fee-4102-96f9-ac06c93bc990}</Project>
-      <Name>XYZ.Core.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\XYZ.Core.Utils\XYZ.Core.Utils.csproj">
       <Project>{7604b0d4-f5f2-4ff0-bcf1-9b1faf5570dd}</Project>

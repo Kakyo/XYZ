@@ -17,7 +17,7 @@ namespace XYZ.Ui.Web
             Attributes.AuthorizeAttribute.LoginUrl = "~/Parceiros/Login";
             AreaRegistration.RegisterAllAreas();
 
-            DependencyConfig.RegisterDependencies(DependencyInjectFactory.GetInstance());
+            DependencyConfig.RegisterDependencies(DependencyInjectFactory.Current);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

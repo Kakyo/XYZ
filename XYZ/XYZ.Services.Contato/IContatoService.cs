@@ -14,6 +14,9 @@ namespace XYZ.Services.Contato
         bool Ping();
 
         [OperationContract]
-        List<Domain.Contato> GetContatos(int take);
+        List<Domain.Contato> GetContatos(int take, int skip);
+
+        [OperationContract]
+        Domain.Contato UpdateContato(long idContato, string celular, DateTime dataNasc);
     }
 }
