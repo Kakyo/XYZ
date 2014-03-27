@@ -33,3 +33,14 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+#region [ Postsharp aspects ]
+
+[assembly: XYZ.Aspects.Log(AttributePriority = 1
+    , AttributeTargetTypes = "XYZ.*")]
+[assembly: XYZ.Aspects.Log(AttributePriority = 2
+    , AttributeTargetTypes = "XYZ.Aspects.*", AttributeExclude = true)]
+[assembly: XYZ.Aspects.Log(AttributePriority = 2
+    , AttributeTargetTypes = "XYZ.Ui.Web.Hub.*", AttributeExclude = true)]
+
+#endregion

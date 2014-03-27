@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace XYZ.Serialization
 {
@@ -11,7 +12,17 @@ namespace XYZ.Serialization
 
         public static string From(object obj)
         {
-            return JsonConvert.SerializeObject(obj, settings);
+            string result = string.Empty;
+            try
+            {
+                if (obj != null)
+                    result = JsonConvert.SerializeObject(obj, settings);
+            }
+            catch (Exception ex)
+            {
+                result = string.Format("Error serializing the instance of {0}", obj.ToString());
+            }
+            return result;
         }
         public static T To<T>(string json)
         {

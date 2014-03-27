@@ -28,6 +28,9 @@ namespace XYZ.Ui.Web
             //  jQuery files
             paths.Add(IfDebug("jquery/jquery-{version}.js"
                 , "jquery/jquery-{version}.min.js"));
+            //  jQuery files
+            paths.Add(IfDebug("jquery/jquery.maskedinput.js"
+                , "jquery/jquery.maskedinput.min.js"));
 
             //  SignalR files
             paths.Add(IfDebug("signalr/jquery.signalR-{version}.js"
